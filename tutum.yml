@@ -1,0 +1,20 @@
+sysdig-agent:
+  image: 'sysdig/agent:latest'
+  deployment_strategy: every_node
+  environment:
+    - ACCESS_KEY=your-sysdig-apikey
+    - TAGS=$TUTUM_NODE_HOSTNAME
+  net: host
+  pid: host
+  privileged: true
+  restart: always
+  tags:
+    - cloud
+  volumes:
+    - '/var/run/docker.sock:/host/var/run/docker.sock'
+    - '/dev:/host/dev'
+    - '/proc:/host/proc:ro'
+    - '/boot:/host/boot:ro'
+    - '/lib/modules:/host/lib/modules:ro'
+    - '/usr:/host/usr:ro'
+
